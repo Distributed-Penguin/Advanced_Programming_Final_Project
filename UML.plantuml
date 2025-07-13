@@ -1,0 +1,170 @@
+@startuml project diagram
+skinparam ClassAttributeIconSize 0
+
+class ArrayList
+
+class Graph extends ArrayList {
+  - static long serialVersionUID
+  +Graph()
+  +hasCycles(): boolean
+  +createFromTopics(): void
+}
+
+class Node {
+  -String name
+  -List<Node> edges
+  -Message msg
+
+  +Node(name: String)
+  +addEdge(node: Node): void
+  +hasCycles(): boolean
+  +hasCyclesDFS(visited: Set<Node>, stack: Set<Node>): boolean
+  +getName(): String
+  +getEdges(): List<Node>
+  +getMsg(): Message
+  +setName(name: String): void
+  +setEdges(edges: List<Node>): void
+  +setMsg(msg: Message): void
+}
+
+interface Config {
+  +create(): void
+  +getName(): String
+  +getVersion(): int
+  +close(): void
+}
+
+class GenericConfig implements Config {
+  -List<Agent> agents <<final>>
+  -String confFile
+  -int version
+
+  +setConfFile(filename: String): void
+  +create(): void
+  +getName(): String
+  +getVersion(): int
+  +close(): void
+}
+
+interface Agent {
+  +getName(): String
+  +reset(): void
+  +callback(topic: String, msg: Message): void
+  +close(): void
+}
+
+class PlusAgent implements Agent {
+  -String name <<final>>
+  -String in1 <<final>>
+  -String in2 <<final>>
+  -String out <<final>>
+  - static int uid = 0
+  -double x
+  -double y
+  -Double res
+
+  +PlusAgent(subs: String[], pubs: String[])
+  +getName(): String
+  +reset(): void
+  +callback(topic: String, msg: Message): void
+  +close(): void
+  -addAndPublish(): void
+  +getX(): double
+  +getY(): double
+}
+
+class IncAgent implements Agent {
+  -String name <<final>>
+  -String input <<final>>
+  -String output <<final>>
+  - static int uid
+  -double x
+
+  +IncAgent(subs: String[], pubs: String[])
+  +getName(): String
+  +reset(): void
+  +callback(topic: String, msg: Message): void
+  +close(): void
+  -publishIncrement(): void
+}
+
+class Message {
+  +byte[] data <<final>>
+  +String asText <<final>>
+  +double asDouble <<final>>
+  +Date date <<final>>
+
+  +Message(s: String)
+  +Message(d: double)
+  +Message(data: byte[])
+}
+
+class ParallelAgent implements Agent {
+  +Agent agent <<final>>
+  +BlockingQueue<MessageWrapper> messages <<final>>
+  +Thread activeThread <<final>>
+  -volatile boolean running
+
+  +ParallelAgent(agent: Agent, capacity: int)
+  +getName(): String
+  +reset(): void
+  +callback(topic: String, message: Message): void
+  +close(): void
+}
+
+class MessageWrapper <<static>><<private>> {
+  +String topic
+  +Message message
+  +boolean IsPoisonPill
+
+  +MessageWrapper(topic: String, message: Message)
+  -MessageWrapper()
+  +static POISON_PILL: MessageWrapper
+}
+
+class Topic {
+  +String name <<final>>
+  -List<Agent> subs <<final>>
+  -List<Agent> pubs <<final>>
+  -Message LastMessage
+
+  +Topic(name: String)
+  +getLastMessage(): Message
+  +subscribe(a: Agent): void
+  +unsubscribe(a: Agent): void
+  +publish(m: Message): void
+  +getName(): String
+  +getSubs(): List<Agent>
+  +getPubs(): List<Agent>
+  +addPublisher(a: Agent): void
+  +removePublisher(a: Agent): void
+}
+
+class TopicManagerSingleton {
+  +get(): TopicManager
+}
+
+class TopicManager <<static>> {
+  - static instance: TopicManager <<final>>
+  -ConcurrentHashMap<String, Topic> topics <<final>>
+
+  -TopicManager()
+  +getTopic(name: String): Topic
+  +getTopics(): Collection<Topic>
+  +clear(): void
+}
+
+
+GenericConfig o..Agent
+Graph o-- Node
+Node o-- Node
+TopicManagerSingleton .down.> TopicManager : exclusive container
+TopicManager o-- Topic : manages
+Node ..> Message
+Topic ..> Message
+ParallelAgent o.. MessageWrapper : <<BlockingQueue>>
+Agent -- Topic : observability
+ParallelAgent --> Thread : activeThread
+MessageWrapper ..> Message
+
+@enduml
