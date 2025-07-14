@@ -160,11 +160,102 @@ Graph o-- Node
 Node o-- Node
 TopicManagerSingleton .down.> TopicManager : exclusive container
 TopicManager o-- Topic : manages
-Node ..> Message
-Topic ..> Message
+Node --> Message
+Topic --> Message
 ParallelAgent o.. MessageWrapper : <<BlockingQueue>>
 Agent -- Topic : observability
 ParallelAgent --> Thread : activeThread
-MessageWrapper ..> Message
+MessageWrapper --> Message
 
+class MyHTTPServer extends Thread implements HTTPServer {
+  -port: int <<final>>
+  -threadPool: ExecutorService <<final>>
+  -servletMap: Servlet>>
+  -running: boolean
+  -ri: RequestInfo
+
+  +MyHTTPServer(port: int, nThreads: int)
+  +addServlet(httpCommand: String, uri: String, s: Servlet): void
+  +removeServlet(httpCommand: String, uri: String): void
+  +run(): void
+  +close(): void
+  -handleClient(client: Socket): void
+}
+
+interface HTTPServer {
+  +addServlet(httpCommand: String, uri: String, s: Servlet): void
+  +removeServlet(httpCommand: String, uri: String): void
+  +start(): void
+  +close(): void
+}
+
+class RequestParser {
+  -httpCommand: String <<final>>
+  -uri: String <<final>>
+  -uriSegments: String[] <<final>>
+  -content: byte[] <<final>>
+  -line: String
+  -parameters: Map<String, String>
+
+  +parseRequest(reader: BufferedReader): RequestInfo
+}
+
+class RequestInfo {
+  +getHttpCommand(): String
+  +getUri(): String
+  +getUriSegments(): String[]
+  +getParameters(): Map<String, String>
+  +getContent(): byte[]
+}
+
+
+MyHTTPServer ..> RequestInfo
+MyHTTPServer o-- Servlet
+MyHTTPServer ..> RequestParser
+RequestParser --> RequestInfo
+
+class HtmlLoader implements Servlet {
+  -directory: String <<final>>
+
+  +HtmlLoader(directory: String)
+  +handle(ri: RequestInfo, toClient: OutputStream): void
+  +close(): void
+}
+
+
+interface Servlet {
+  +handle(ri: RequestInfo, toClient: OutputStream): void
+  +close(): void
+}
+
+class TopicDisplayer implements Servlet {
+  +handle(ri: RequestInfo, toClient: OutputStream): void
+  +close(): void
+}
+
+class ConfLoader implements Servlet {
+  +handle(ri: RequestInfo, toClient: OutputStream): void
+  +close(): void
+}
+
+HtmlLoader --> RequestInfo
+TopicDisplayer --> Topic
+Servlet -->RequestInfo
+ConfLoader --> Graph
+ConfLoader --> GenericConfig
+
+class HtmlGraphWriter {
+  +getGraphHTML(g: Graph): List<String>
+  -cleanLabel(Label: String): String
+}
+
+HtmlGraphWriter --> Graph
+HtmlGraphWriter --> Node
+ConfLoader --> HtmlGraphWriter
+
+class Main {
+  +main(args: String[]): void
+}
+
+main --> MyHTTPServer
 @enduml
