@@ -7,7 +7,7 @@ In this project I learned much about SOLID design principles, which is an excell
 For example, by defining the interface 'Agent' we were able to plan a graph for many types of different operator modules which implement agent (such as PlusAgent and Inc agent).
 Dependency inversion: In this project we realized the Observer pattern using the interface of agent (observer), which has a callback and a publish function, which are customizeable based in the agent implementation.
 The Topic class (Observable) is a simple medium: some Agent activates its publish for some Message object. The function, in turn, activates all subscribed agents' callback functions with the recieved message, and they do with it as they please.
-This allows full flexibility for observer implementations.
+This allows full flexibility for observer design pattern implementations.
 
 In this project we also touched on server design: we designed a toy HTTP server, which recieves real HTTP requests from the browser.
 The server designates appropriate servlets to handle different HTTP requests efficiently (keeping in mind single-responsibilty, interface segregation and dependency inversion).
