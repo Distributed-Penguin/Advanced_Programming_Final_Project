@@ -5,8 +5,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * helper class for MyHTTPServer to parse HTML requests
+ */
 public class RequestParser {
-
+	
+	/**
+	 * inner class containing request info
+	 */
     public static RequestInfo parseRequest(BufferedReader reader) throws IOException {        
 		
     	String requestLine = reader.readLine(); // e.g., GET /path/to/resource?a=1&b=2 HTTP/1.1

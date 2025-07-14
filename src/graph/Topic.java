@@ -3,7 +3,9 @@ package graph;
 import java.util.ArrayList;
 import java.util.List;
 
-//notify list of observers with messages from a list of publishers
+/**
+ * notify list of observers with messages from a list of publishers
+ */
 public class Topic {
 	
     public final String name;

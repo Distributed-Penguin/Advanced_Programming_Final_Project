@@ -2,7 +2,9 @@ package configs;
 
 import graph.*;
 
-//For this class I wrap a PlusAgent and set one of its inputs to 1
+/**
+ * For this class I wrap a PlusAgent and set one of its inputs to 1
+ */
 public class IncAgent implements Agent {
 	
 	private final String name;

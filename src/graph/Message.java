@@ -2,6 +2,9 @@ package graph;
 
 import java.util.Date;
 
+/**
+ * message container class
+ */
 public class Message {
     public final byte[] data;
     public final String asText;

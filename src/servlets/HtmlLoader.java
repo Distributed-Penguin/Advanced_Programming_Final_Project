@@ -13,7 +13,9 @@ public class HtmlLoader implements Servlet {
         this.directory = directory;
     }
     
-    //handle HTTP GET "/app" requests - loads index page
+    /**
+     * handle HTTP GET "/app" requests - loads index page
+     */
     @Override
     public void handle(RequestInfo ri, OutputStream toClient) throws IOException {
         PrintWriter out = new PrintWriter(toClient);

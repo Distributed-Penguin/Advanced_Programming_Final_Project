@@ -3,6 +3,9 @@ package graph;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * active object implementation of agent
+ */
 public class ParallelAgent implements Agent{
 	
 	public final Agent agent; //wrapped agent
@@ -82,7 +85,9 @@ public class ParallelAgent implements Agent{
 		
 	}
     
-	//private class to allow graceful closure of active thread using poison pill
+	/*
+	 * private class to allow graceful closure of active thread using poison pill
+	 */
 	private static class MessageWrapper{
 		Message message;
 		String topic;

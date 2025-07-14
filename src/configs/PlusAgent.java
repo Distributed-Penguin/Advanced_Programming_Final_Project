@@ -2,7 +2,9 @@ package configs;
 
 import graph.*;
 
-//PlusAgent is essentially a BinOpAgent with internal variables called x and y
+/**
+ * PlusAgent is essentially a BinOpAgent with internal variables called x and y
+ */
 public class PlusAgent implements Agent  {
 	
 	private final String name;

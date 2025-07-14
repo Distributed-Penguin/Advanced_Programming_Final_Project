@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
-
+/**
+ * this class realizes graph nodes which are characterized by a name, message and list of neighbors
+ */
 public class Node {
     private String name;
 	private List<Node> edges; //neighbors list

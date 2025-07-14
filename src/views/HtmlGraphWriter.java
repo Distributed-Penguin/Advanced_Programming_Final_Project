@@ -5,7 +5,10 @@ import configs.Node;
 
 import java.io.*;
 import java.util.*;
-
+/**
+ * This class extracts dynamic graph information from Graph object and injects it into a static HTML file called
+ * graph.html, which contains static instructions for graphical representation
+ */
 public class HtmlGraphWriter {
 	//helper function - injects a graph object g into a graph.html graphical template file in cytoscape JS library format
 	public static List<String> getGraphHTML(Graph g) {

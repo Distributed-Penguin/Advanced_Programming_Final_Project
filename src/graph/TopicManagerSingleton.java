@@ -3,10 +3,14 @@ package graph;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
 
-//maintain exclusive TopicManager as singleton
+/**
+ * maintain exclusive TopicManager as singleton
+ */
 public class TopicManagerSingleton {
 
-	//static class within class to utilize concurrent lazy programming of singleton
+	/*
+	 * static class within class to utilize concurrent lazy programming of singleton
+	 */
 	public static class TopicManager{
     	
 		private static final TopicManager instance = new TopicManager();//exclusive TopicManager (no one else can access constructor)

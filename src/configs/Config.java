@@ -1,5 +1,8 @@
 package configs;
 
+/**
+ * config class interface
+ */
 public interface Config {
     void create();
     String getName();

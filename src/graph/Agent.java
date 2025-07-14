@@ -1,5 +1,8 @@
 package graph;
 
+/**
+ * agent interface
+ */
 public interface Agent {
     String getName();
     void reset();

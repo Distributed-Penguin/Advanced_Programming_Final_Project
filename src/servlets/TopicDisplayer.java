@@ -8,7 +8,9 @@ import java.util.Collection;
 
 public class TopicDisplayer implements Servlet {
 	
-	//handle HTTP GET "/publish" request - update and display topics
+	/**
+	 * handle HTTP GET "/publish" request - update and display topics
+	 */
     @Override
     public void handle(RequestInfo ri, OutputStream toClient) throws IOException {
         PrintWriter out = new PrintWriter(toClient);

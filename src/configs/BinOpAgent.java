@@ -3,6 +3,9 @@ package configs;
 import graph.*;
 import java.util.function.BinaryOperator;
 
+/**
+ * an agent which runs an arithmetic operation on two operators 
+ */
 public class BinOpAgent implements Agent{
     private final String name;
     private final String in1;

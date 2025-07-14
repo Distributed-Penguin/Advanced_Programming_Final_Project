@@ -4,6 +4,9 @@ import graph.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * graph representation class - bassically an extension of ArrayList<Node>
+ */
 public class Graph extends ArrayList<Node>{
     
 	private static final long serialVersionUID = 1L;

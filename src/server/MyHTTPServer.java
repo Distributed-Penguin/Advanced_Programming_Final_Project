@@ -17,7 +17,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-
+/**
+ * this class runs an HTTP server with designated servlets to process specific client requests
+ */
 public class MyHTTPServer extends Thread implements HTTPServer{
     
 	private final int port;

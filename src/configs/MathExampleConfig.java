@@ -1,6 +1,8 @@
 package configs;
 
-
+/**
+ * config example
+ */
 public class MathExampleConfig implements Config {
 
     @Override

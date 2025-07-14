@@ -3,8 +3,16 @@ package views;
 import server.*;
 import servlets.*;
 
+/**
+ * Entry point for the application.
+ * Responsible for launching the configured agents and starting the server.
+ */
 public class Main {
-	//server init
+	/**
+     * Launches the application from the command line.
+     * @param args command-line arguments (not used)
+     * @throws Exception if an error occurs during startup
+     */
 	public static void main(String[] args) throws Exception{
 		HTTPServer server=new MyHTTPServer(8080,5);
 		

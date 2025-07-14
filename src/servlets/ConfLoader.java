@@ -9,7 +9,9 @@ import java.util.List;
 
 public class ConfLoader implements Servlet {
 	
-	//handle HTTP POST "/upload" requests - generates an HTTP graph representation with HtmlGraphWriter helper class and broadcasts to client
+	/**
+	 * handle HTTP POST "/upload" requests - generates an HTTP graph representation with HtmlGraphWriter helper class and broadcasts to client
+	 */
     @Override
     public void handle(RequestInfo ri, OutputStream toClient) throws IOException {
         PrintWriter out = new PrintWriter(toClient);

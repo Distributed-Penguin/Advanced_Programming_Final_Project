@@ -7,6 +7,13 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class reads a static .conf file, which is constructed of triplets:
+ * first line: agent
+ * second line: input topics, separated by commas
+ * third line: output topics
+ * finally - a blank line
+ */
 public class GenericConfig implements Config {
     private final List<Agent> agents = new ArrayList<>();
     private String confFile;
