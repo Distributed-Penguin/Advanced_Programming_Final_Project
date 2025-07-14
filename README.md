@@ -26,4 +26,5 @@ A config is a text file with a ".conf" suffix.
 The file consists of line triplets: the first line will be the operator class (with path and package references), next line will be input nodes, the line after that output nodes.
 The file must end with a blank line in order to work.
 Note that input/output nodes are uniquely identified by name, so if one operator module outputs to 'x', then we can wire the output to another module using 'x'.
+All outputs are presented in the topics table on the left-hand side of the page. 
 The project currently supports an increment module (configs.IncAgent), and addition agents (PlusAgent), but more may be added in the future.
